@@ -41,8 +41,8 @@ export function generateBaseline(): BaselineRow[] {
   const confirmedIntervals = new Map<string, { start: Date; end: Date }[]>();
   for (const room of roomDefs) confirmedIntervals.set(room.slug, []);
 
-  // Exclusion window around the fixed Atomic Suite reservation: no other
-  // confirmed stay is generated for that room in this range.
+  // The Atomic Suite holds one known stay in late autumn; generated stays keep
+  // clear of that window so those dates stay stable across runs.
   confirmedIntervals.get('atomic-suite')?.push({
     start: new Date('2026-10-15T00:00:00Z'),
     end: new Date('2026-11-05T00:00:00Z'),

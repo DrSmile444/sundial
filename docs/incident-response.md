@@ -39,7 +39,7 @@ jq -c 'select(.level == "error")' logs/app.ndjson | tail -20
 jq -c 'select(.route == "/api/rooms") | {ts, requestId, status, durationMs, dbQueries}' logs/app.ndjson
 
 # a business identifier the guest gave you
-jq -c 'select(.roomSlug == "atomic-suite")' logs/app.ndjson | tail -20
+jq -c 'select(.roomSlug == "sputnik-loft")' logs/app.ndjson | tail -20
 jq -c 'select(.reference == "SD-XXXXXX")' logs/app.ndjson
 ```
 
@@ -65,10 +65,10 @@ docker compose exec db psql -U sundial
 ```
 
 ```sql
-select id, slug, gallery from rooms where slug = '…';
+select * from rooms where slug = '…';
+select * from reservations where reference = '…';
 select * from reservations where room_id = … order by check_in;
-select * from reservations where booking_intent_id = '…';
-select count(*) from reviews where room_id = …;
+select * from booking_intents where id = '…';
 ```
 
 State matters as much as code: the same handler behaves differently on
@@ -91,8 +91,9 @@ A symptom you cannot reproduce is a symptom you cannot prove you fixed.
 
 Write one sentence of the form: _if X is the cause, then Y is true in the
 evidence._ Then go and check Y. Keep the sentence specific enough that the
-evidence can say no — "the handler compares the two dates the other way round"
-can be refused; "something about the dates" cannot.
+evidence can say no — "the price is recomputed from the room's current
+rate rather than from the quoted one" can be refused; "something about the
+price" cannot.
 
 ## 8. Write the failing test first
 
@@ -117,7 +118,7 @@ the log line now reads as it should.
 ## 11. Write the record
 
 Add `docs/rca/<date>-<slug>.md`, for example
-`docs/rca/2026-09-18-duplicate-reservation.md`:
+`docs/rca/2026-04-02-manage-page-timeouts.md`:
 
 ```markdown
 # <short title>
