@@ -53,3 +53,6 @@ next-env.d.ts
 
 # IDE
 .idea/
+
+# Playwright CLI sessions
+.playwright-cli/
