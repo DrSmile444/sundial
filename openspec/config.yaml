@@ -1,0 +1,52 @@
+schema: spec-driven
+
+context: |
+  Sundial — a mid-century boutique hotel reservation platform. Guests
+  discover rooms, check availability, book a stay (pay at property), and
+  manage an existing reservation by reference and email.
+
+  Stack
+  - Next.js 16 (App Router), React 19, TypeScript 5 (strict,
+    noUncheckedIndexedAccess, noImplicitOverride)
+  - Tailwind CSS v4, design tokens in src/app/globals.css
+  - Postgres 16 via Docker Compose (container sundial-db, port 54329),
+    Drizzle ORM, SQL migrations in drizzle/, schema in src/db/schema.ts
+  - Route Handlers under src/app/api/** serve the API; no separate backend
+  - Sentry (@sentry/nextjs) for error tracking, inert when SENTRY_DSN is empty
+  - Vitest for unit tests, Playwright for end-to-end tests
+
+  Commands
+    pnpm dev            # start the dev server on :3000
+    pnpm build           # production build
+    pnpm lint             # eslint .
+    pnpm typecheck        # tsc --noEmit
+    pnpm format:check     # prettier --check .
+    pnpm test             # vitest run
+    pnpm e2e              # playwright test (starts pnpm dev automatically)
+    pnpm db:generate      # drizzle-kit generate
+    pnpm db:migrate       # apply SQL migrations
+    pnpm db:seed          # seed the database
+    docker compose up -d  # start Postgres
+
+  Quality bar — a change is not done until all of these pass:
+    lint, typecheck, unit tests (test), end-to-end tests (e2e), build.
+
+  Conventions
+  - Conventional Commits for every commit message.
+  - Specs and proposals write acceptance scenarios as explicit
+    Given / When / Then blocks.
+  - Change only what a task asks for; leave behaviour outside a task's
+    scope as it is, and mention it instead of fixing it in passing.
+
+rules:
+  proposal:
+    - 'State the user-visible behaviour change in one sentence before any implementation detail.'
+    - 'Include a Non-goals section.'
+    - 'Name every route, page and API handler the change touches. If it touches none, say so.'
+  specs:
+    - 'Every requirement MUST have at least one acceptance scenario written as an explicit Given / When / Then block.'
+    - 'Write scenarios against observable behaviour (what renders, what request is sent, what response comes back), not internal function calls.'
+  tasks:
+    - 'Keep tasks to at most ~2 hours of work each; split anything larger.'
+    - "Do not add a task that fixes an unrelated pre-existing issue outside the change's scope. Note it instead."
+    - 'The final task of every change is to run lint, typecheck, test, e2e and build, and confirm all pass.'
