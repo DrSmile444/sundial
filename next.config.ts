@@ -8,7 +8,9 @@ const nextConfig: NextConfig = {
 };
 
 export default withSentryConfig(nextConfig, {
-  silent: true,
+  org: 'none-bdc',
+  project: 'sundial',
+  silent: !process.env.SENTRY_DEBUG,
   telemetry: false,
   sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN },
 });
