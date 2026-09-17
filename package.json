@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "NEXT_PUBLIC_RELEASE=$(node scripts/release.mjs) next dev --webpack",
+    "build": "NEXT_PUBLIC_RELEASE=$(node scripts/release.mjs) next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -19,11 +19,13 @@
     "db:seed:reservations": "tsx --env-file=.env src/db/seed-reservations.ts"
   },
   "dependencies": {
+    "@sentry/nextjs": "^10.75.0",
     "drizzle-orm": "^0.45.2",
     "next": "16.3.5",
     "pg": "^8.23.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
