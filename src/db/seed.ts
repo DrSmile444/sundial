@@ -7,27 +7,6 @@ import { seedReservations } from './seed-reservations';
 import { seedReviews } from './seed-reviews';
 import type { Gallery } from './types';
 
-type LegacyGallery = { primary: string; caption: string };
-
-function galleryFor(slug: string, name: string, imageCount: number): Gallery | LegacyGallery {
-  if (slug === 'garden-casita') {
-    // Legacy gallery shape from the first version of the catalogue: a single
-    // primary image and caption, with no `images` array.
-    return {
-      primary: `https://picsum.photos/seed/${slug}-1/1200/800`,
-      caption: `${name} view`,
-    };
-  }
-
-  return {
-    images: Array.from({ length: imageCount }, (_, index) => ({
-      url: `https://picsum.photos/seed/${slug}-${String(index + 1)}/1200/800`,
-      alt: `${name}, photo ${String(index + 1)}`,
-      ...(index === 0 ? { isPrimary: true } : {}),
-    })),
-  };
-}
-
 async function seedCatalogue() {
   await db.insert(amenities).values(amenityDefs);
 
@@ -46,7 +25,7 @@ async function seedCatalogue() {
         bedType: room.bedType,
         nightlyRateCents: room.nightlyRateCents,
         ratingDisplay: room.ratingDisplay,
-        gallery: galleryFor(room.slug, room.name, room.imageCount) as unknown as Gallery,
+        gallery: room.gallery as unknown as Gallery,
         featured: room.featured,
         sortOrder: room.sortOrder,
       })

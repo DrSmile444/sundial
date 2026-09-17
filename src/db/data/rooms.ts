@@ -10,8 +10,23 @@ export type RoomDef = {
   featured: boolean;
   sortOrder: number;
   amenities: string[];
-  imageCount: number;
+  gallery: Record<string, unknown>;
 };
+
+function imagesFor(slug: string, count: number): Record<string, unknown> {
+  const label = slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  return {
+    images: Array.from({ length: count }, (_, index) => ({
+      url: `https://picsum.photos/seed/${slug}-${String(index + 1)}/1200/800`,
+      alt: `${label}, photo ${String(index + 1)}`,
+      ...(index === 0 ? { isPrimary: true } : {}),
+    })),
+  };
+}
 
 export const roomDefs: RoomDef[] = [
   {
@@ -34,7 +49,7 @@ export const roomDefs: RoomDef[] = [
       'minibar',
       'record-player',
     ],
-    imageCount: 5,
+    gallery: imagesFor('atomic-suite', 5),
   },
   {
     slug: 'sputnik-loft',
@@ -49,7 +64,7 @@ export const roomDefs: RoomDef[] = [
     featured: true,
     sortOrder: 2,
     amenities: ['air-conditioning', 'record-player', 'wifi', 'minibar'],
-    imageCount: 4,
+    gallery: imagesFor('sputnik-loft', 4),
   },
   {
     slug: 'kidney-pool-bungalow',
@@ -64,7 +79,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 3,
     amenities: ['pool-access', 'air-conditioning', 'private-patio'],
-    imageCount: 4,
+    gallery: imagesFor('kidney-pool-bungalow', 4),
   },
   {
     slug: 'garden-casita',
@@ -79,7 +94,10 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 4,
     amenities: ['private-patio', 'air-conditioning', 'wifi'],
-    imageCount: 3,
+    gallery: {
+      primary: 'https://picsum.photos/seed/garden-casita-1/1200/800',
+      caption: 'Garden casita with private patio',
+    },
   },
   {
     slug: 'eames-studio',
@@ -94,7 +112,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 5,
     amenities: ['kitchenette', 'air-conditioning', 'wifi'],
-    imageCount: 3,
+    gallery: imagesFor('eames-studio', 3),
   },
   {
     slug: 'neutra-corner-room',
@@ -109,7 +127,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 6,
     amenities: ['air-conditioning', 'mountain-view', 'wifi', 'minibar'],
-    imageCount: 4,
+    gallery: imagesFor('neutra-corner-room', 4),
   },
   {
     slug: 'boomerang-suite',
@@ -131,7 +149,7 @@ export const roomDefs: RoomDef[] = [
       'minibar',
       'fireplace',
     ],
-    imageCount: 5,
+    gallery: imagesFor('boomerang-suite', 5),
   },
   {
     slug: 'starburst-penthouse',
@@ -146,7 +164,7 @@ export const roomDefs: RoomDef[] = [
     featured: true,
     sortOrder: 8,
     amenities: ['mountain-view', 'fireplace', 'minibar', 'air-conditioning', 'private-patio'],
-    imageCount: 5,
+    gallery: imagesFor('starburst-penthouse', 5),
   },
   {
     slug: 'desert-modern-room',
@@ -161,7 +179,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 9,
     amenities: ['air-conditioning', 'wifi', 'ceiling-fan'],
-    imageCount: 3,
+    gallery: imagesFor('desert-modern-room', 3),
   },
   {
     slug: 'palm-court-suite',
@@ -176,7 +194,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 10,
     amenities: ['soaking-tub', 'air-conditioning', 'minibar', 'wifi'],
-    imageCount: 4,
+    gallery: imagesFor('palm-court-suite', 4),
   },
   {
     slug: 'breezeblock-bungalow',
@@ -191,7 +209,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 11,
     amenities: ['private-patio', 'air-conditioning', 'pet-friendly'],
-    imageCount: 3,
+    gallery: imagesFor('breezeblock-bungalow', 3),
   },
   {
     slug: 'shag-lounge-room',
@@ -206,7 +224,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 12,
     amenities: ['air-conditioning', 'record-player', 'wifi'],
-    imageCount: 3,
+    gallery: imagesFor('shag-lounge-room', 3),
   },
   {
     slug: 'terrazzo-suite',
@@ -221,7 +239,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 13,
     amenities: ['private-patio', 'air-conditioning', 'wifi', 'minibar'],
-    imageCount: 4,
+    gallery: imagesFor('terrazzo-suite', 4),
   },
   {
     slug: 'cactus-garden-room',
@@ -236,7 +254,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 14,
     amenities: ['private-patio', 'air-conditioning', 'ceiling-fan'],
-    imageCount: 3,
+    gallery: imagesFor('cactus-garden-room', 3),
   },
   {
     slug: 'rat-pack-suite',
@@ -251,7 +269,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 15,
     amenities: ['minibar', 'record-player', 'air-conditioning', 'wifi'],
-    imageCount: 4,
+    gallery: imagesFor('rat-pack-suite', 4),
   },
   {
     slug: 'moonlight-cabana',
@@ -266,7 +284,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 16,
     amenities: ['pool-access', 'air-conditioning', 'wifi'],
-    imageCount: 3,
+    gallery: imagesFor('moonlight-cabana', 3),
   },
   {
     slug: 'sunburst-room',
@@ -281,7 +299,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 17,
     amenities: ['air-conditioning', 'wifi', 'ceiling-fan'],
-    imageCount: 3,
+    gallery: imagesFor('sunburst-room', 3),
   },
   {
     slug: 'alexander-steel-suite',
@@ -296,7 +314,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 18,
     amenities: ['air-conditioning', 'mountain-view', 'wifi', 'minibar'],
-    imageCount: 4,
+    gallery: imagesFor('alexander-steel-suite', 4),
   },
   {
     slug: 'twin-palms-room',
@@ -311,7 +329,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 19,
     amenities: ['air-conditioning', 'wifi', 'ceiling-fan'],
-    imageCount: 3,
+    gallery: imagesFor('twin-palms-room', 3),
   },
   {
     slug: 'lanai-retreat',
@@ -326,7 +344,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 20,
     amenities: ['private-patio', 'pet-friendly', 'air-conditioning', 'wifi'],
-    imageCount: 4,
+    gallery: imagesFor('lanai-retreat', 4),
   },
   {
     slug: 'poolside-cabana',
@@ -341,7 +359,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 21,
     amenities: ['pool-access', 'private-patio', 'air-conditioning'],
-    imageCount: 4,
+    gallery: imagesFor('poolside-cabana', 4),
   },
   {
     slug: 'butterfly-roof-suite',
@@ -356,7 +374,7 @@ export const roomDefs: RoomDef[] = [
     featured: true,
     sortOrder: 22,
     amenities: ['air-conditioning', 'private-patio', 'minibar', 'mountain-view', 'wifi'],
-    imageCount: 5,
+    gallery: imagesFor('butterfly-roof-suite', 5),
   },
   {
     slug: 'vista-modern-room',
@@ -371,7 +389,7 @@ export const roomDefs: RoomDef[] = [
     featured: false,
     sortOrder: 23,
     amenities: ['mountain-view', 'air-conditioning', 'wifi'],
-    imageCount: 4,
+    gallery: imagesFor('vista-modern-room', 4),
   },
   {
     slug: 'orbit-penthouse',
@@ -386,6 +404,6 @@ export const roomDefs: RoomDef[] = [
     featured: true,
     sortOrder: 24,
     amenities: ['mountain-view', 'private-patio', 'fireplace', 'minibar', 'air-conditioning'],
-    imageCount: 5,
+    gallery: imagesFor('orbit-penthouse', 5),
   },
 ];

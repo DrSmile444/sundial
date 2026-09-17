@@ -4,7 +4,7 @@ import { firstNames, lastNames, reviewBodyTemplates, reviewTitleTemplates } from
 import { intBetween, mulberry32, pick, toDateString } from './rng';
 
 const SEED = 20260918 + 2;
-const TOTAL_REVIEWS = 200_000;
+const TOTAL_REVIEWS = 600_000;
 const BATCH_SIZE = 5_000;
 const RANGE_START = new Date('2022-01-01T00:00:00Z');
 const RANGE_END = new Date('2026-12-31T00:00:00Z');
