@@ -151,7 +151,7 @@ function present(room: FoundRoom, rating: RatingSummary): OrderedRoom {
   };
 }
 
-/** Rating as the catalogue holds it, with the review counts read in one pass. */
+/** Rating as the catalogue holds it. */
 async function byStoredRating(found: FoundRoom[]): Promise<OrderedRoom[]> {
   if (found.length === 0) return [];
 
