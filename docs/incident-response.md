@@ -39,7 +39,7 @@ jq -c 'select(.level == "error")' logs/app.ndjson | tail -20
 jq -c 'select(.route == "/api/rooms") | {ts, requestId, status, durationMs, dbQueries}' logs/app.ndjson
 
 # a business identifier the guest gave you
-jq -c 'select(.roomSlug == "sputnik-loft")' logs/app.ndjson | tail -20
+jq -c 'select(.roomSlug == "apollo-loft")' logs/app.ndjson | tail -20
 jq -c 'select(.reference == "SD-XXXXXX")' logs/app.ndjson
 ```
 

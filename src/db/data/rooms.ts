@@ -52,11 +52,11 @@ export const roomDefs: RoomDef[] = [
     gallery: imagesFor('atomic-suite', 5),
   },
   {
-    slug: 'sputnik-loft',
-    name: 'Sputnik Loft',
+    slug: 'apollo-loft',
+    name: 'Apollo Loft',
     tagline: 'A double-height loft under a starburst chandelier',
     description:
-      'Named for the orbiting light fixture suspended above the living area, this loft rises a full story above the garden courtyard. A spiral stair leads to a sleeping mezzanine, and the record player and vintage bar cart set the mood for a slow evening in.',
+      'Named for the starburst fixture suspended above the living area, this loft rises a full story above the garden courtyard. A spiral stair leads to a sleeping mezzanine, and the record player and vintage bar cart set the mood for a slow evening in.',
     capacity: 2,
     bedType: 'Queen',
     nightlyRateCents: 42000,
@@ -64,7 +64,7 @@ export const roomDefs: RoomDef[] = [
     featured: true,
     sortOrder: 2,
     amenities: ['air-conditioning', 'record-player', 'wifi', 'minibar'],
-    gallery: imagesFor('sputnik-loft', 4),
+    gallery: imagesFor('apollo-loft', 4),
   },
   {
     slug: 'kidney-pool-bungalow',

@@ -2,7 +2,7 @@ import { expect, test, type APIRequestContext } from '@playwright/test';
 
 const STAY = { checkIn: '2027-03-02', checkOut: '2027-03-05', guests: 2 };
 
-const CANDIDATE_ROOMS = ['sputnik-loft', 'kidney-pool-bungalow', 'eames-studio'];
+const CANDIDATE_ROOMS = ['apollo-loft', 'kidney-pool-bungalow', 'eames-studio'];
 
 async function firstFreeRoom(request: APIRequestContext): Promise<string> {
   for (const roomSlug of CANDIDATE_ROOMS) {
