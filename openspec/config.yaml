@@ -50,3 +50,6 @@ rules:
     - 'Keep tasks to at most ~2 hours of work each; split anything larger.'
     - "Do not add a task that fixes an unrelated pre-existing issue outside the change's scope. Note it instead."
     - 'The final task of every change is to run lint, typecheck, test, e2e and build, and confirm all pass.'
+    - 'Every phase that touches source files ends with a verification task running `pnpm lint && pnpm typecheck && pnpm test`.'
+    - 'Every implementation task has a paired test task, unless the change has no behaviour to test (pure config or docs) — say so explicitly when that applies.'
+    - 'Never delete or skip an existing test to make the suite pass. If a test or the build fails, fix the code or the test, not the check.'
