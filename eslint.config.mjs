@@ -29,6 +29,8 @@ const eslintConfig = defineConfig([
     'playwright-report/**',
     'test-results/**',
     'drizzle/**',
+    // Claude Code tooling directory, including any git worktrees it manages.
+    '.claude/**',
   ]),
 ]);
 
