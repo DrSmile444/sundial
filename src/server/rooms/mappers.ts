@@ -53,13 +53,18 @@ function toImage(image: Gallery['images'][number]): RoomImage {
   };
 }
 
+function toImages(gallery: unknown): RoomImage[] {
+  const images =
+    gallery && typeof gallery === 'object' ? (gallery as { images?: unknown }).images : undefined;
+
+  return Array.isArray(images) ? images.map(toImage) : [];
+}
+
 export function toRoomDetail(
   row: RoomDetailRow,
   rating: RatingSummary,
   recentReviews: ReviewSummary[],
 ): RoomDetail {
-  const gallery = row.gallery as Gallery;
-
   return {
     slug: row.slug,
     name: row.name,
@@ -68,7 +73,7 @@ export function toRoomDetail(
     capacity: row.capacity,
     bedType: row.bedType,
     nightlyRateCents: row.nightlyRateCents,
-    images: gallery.images.map(toImage),
+    images: toImages(row.gallery),
     amenities: row.amenities,
     rating,
     recentReviews,

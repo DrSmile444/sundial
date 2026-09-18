@@ -49,8 +49,8 @@ export default async function RoomDetailPage({ params, searchParams }: PageProps
   return (
     <PageShell>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {lead ? (
-          <div className="relative aspect-4/3 w-full overflow-hidden rounded-card bg-sand sm:col-span-2 sm:row-span-2">
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded-card bg-sand sm:col-span-2 sm:row-span-2">
+          {lead ? (
             <Image
               src={lead.url}
               alt={lead.alt}
@@ -59,8 +59,8 @@ export default async function RoomDetailPage({ params, searchParams }: PageProps
               className="object-cover"
               priority
             />
-          </div>
-        ) : null}
+          ) : null}
+        </div>
         {rest.slice(0, 4).map((image) => (
           <div
             key={image.url}

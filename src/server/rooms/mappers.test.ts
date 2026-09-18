@@ -37,4 +37,20 @@ describe('toRoomDetail', () => {
     expect(detail.amenities).toEqual(['pool-access', 'record-player']);
     expect(detail.rating).toEqual({ average: 4.9, count: 8433 });
   });
+
+  it('treats a gallery with no images array as having zero images', () => {
+    const gardenCasitaRow: RoomDetailRow = {
+      ...row,
+      slug: 'garden-casita',
+      name: 'Garden Casita',
+      gallery: {
+        primary: 'https://example.test/garden-casita-1.jpg',
+        caption: 'Garden casita with private patio',
+      },
+    };
+
+    const detail = toRoomDetail(gardenCasitaRow, { average: 4.4, count: 12 }, []);
+
+    expect(detail.images).toEqual([]);
+  });
 });

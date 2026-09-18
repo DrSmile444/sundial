@@ -25,3 +25,10 @@ test('room details open from a card', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Book this room' })).toBeVisible();
   await expect(page.getByLabel('Check in')).toBeVisible();
 });
+
+test('room details render for a room with no gallery images', async ({ page }) => {
+  const response = await page.goto('/rooms/garden-casita');
+
+  expect(response?.status()).toBe(200);
+  await expect(page.getByRole('heading', { name: 'Garden Casita', level: 1 })).toBeVisible();
+});
